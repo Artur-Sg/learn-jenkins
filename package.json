@@ -1,6 +1,6 @@
 {
   "name": "learn-jenkins",
-  "version": "0.1.0",
+  "version": "latest",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-peer": "^0.2.6",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -31,5 +32,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }
