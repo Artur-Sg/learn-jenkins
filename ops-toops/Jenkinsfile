@@ -8,7 +8,7 @@ pipeline {
     }
   stage('Quality check') {
     steps {
-      sh 'yarn test'
+      sh 'yarn run test:nowatch'
       }
     }
   stage('Build') {
