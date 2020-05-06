@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Install dependencies') {
       steps {
-        sh 'npm ci'
+        sh 'npm install'
       }
     }
   stage('Quality check') {
@@ -15,6 +15,11 @@ pipeline {
     steps {
       sh 'yarn build'
       }
+    }
+  }
+  post {
+    always {
+      //updateGithubCommitStatus(currentBuild)
     }
   }
 }
