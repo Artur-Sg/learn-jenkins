@@ -1,0 +1,25 @@
+pipeline {
+  agent any
+  stages {
+    stage('Install dependencies') {
+      steps {
+        sh 'npm ci'
+      }
+    }
+  stage('Quality check') {
+    steps {
+      sh 'yarn test'
+      }
+    }
+  stage('Build') {
+    steps {
+      sh 'yarn build'
+      }
+    }
+  }
+  post {
+    always {
+      updateGithubCommitStatus(currentBuild)
+    }
+  }
+}
