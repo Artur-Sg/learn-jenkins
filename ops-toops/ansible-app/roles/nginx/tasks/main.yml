@@ -22,7 +22,10 @@
     state: directory
     
 - name: Move builded files
-  command: mv /var/lib/jenkins/workspace/Check-Front/frontend/build/* "{{ server_root_directory }}/
+  copy:
+    src: /var/lib/jenkins/workspace/Check-Front/frontend/build/
+    dest: "{{ server_root_directory }}"
+  notify: reload nginx
 
 - name: toggle SELinux value httpd network to on
   seboolean:
