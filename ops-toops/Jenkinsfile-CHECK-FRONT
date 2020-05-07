@@ -3,21 +3,18 @@ pipeline {
   stages {
     stage('Install dependencies') {
       steps {
-        sh 'cd frontend'
-        sh 'yarn install'
+        sh 'cd frontend/ | yarn install'
       }
     }
   stage('Quality checks') {
     steps {
-      sh 'cd frontend'
-      sh 'npx eslint src'
+      sh 'cd frontend/ | npx eslint src'
       sh 'yarn run test:nowatch'
       }
     }
   stage('Build') {
     steps {
-      sh 'cd frontend'
-      sh 'yarn build'
+      sh 'cd frontend/ | yarn build'
       }
     }
   }
