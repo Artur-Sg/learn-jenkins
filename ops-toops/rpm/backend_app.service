@@ -1,0 +1,13 @@
+
+[Unit]
+Description=Run hometask back-app
+
+[Service]
+WorkingDirectory=/usr/bin/backapp
+ExecStart=/bin/java -Xms128m -Xmx256m -jar backend.jar
+Type=simple
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
