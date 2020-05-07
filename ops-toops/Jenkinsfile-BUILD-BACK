@@ -30,7 +30,7 @@ pipeline {
           repository: 'https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/',
           credentialsId: '$NEXUS_CREDS',
           artifacts: [
-              [artifactId: sgibnev_app,
+              [artifactId: ops_school,
               classifier: '',
               file: 'sgibnev_app-1-1.x86_64.rpm',
               type: 'rpm']
