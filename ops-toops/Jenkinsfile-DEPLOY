@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  stages {
+    stage('Deploy') {
+      steps {
+        dir('ops-toops/ansible-app') {
+          ansiblePlaybook(inventory: 'aws_ec2.yml', playbook: 'playbook.yml');
+        }
+      }
+    }
+  }
+  post {
+    success {
+      sh 'echo "Success!"'
+    }
+  }
+}
