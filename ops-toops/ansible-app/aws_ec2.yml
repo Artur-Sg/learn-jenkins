@@ -8,5 +8,5 @@ strict: False
 keyed_groups:
   - key: tags['environment']
     separator: ''
-aws_access_key: AKIAJPAPB3V4XHZFKE5Q
-aws_secret_key: 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
+aws_access_key: AKIASMIBCCKRQBX3T7U4
+aws_secret_key: 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
