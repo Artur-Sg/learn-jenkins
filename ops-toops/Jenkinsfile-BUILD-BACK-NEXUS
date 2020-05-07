@@ -28,11 +28,11 @@ pipeline {
           repository: 'dev-ops-2020',
           groupId: 'sgibnev',
           version: '1-1',
-          credentialsId: 'nexus-creds',
+          credentialsId: '$NEXUS_CREDS',
           artifacts: [
               [ artifactId: 'sgibnev_app',
                 file: 'sgibnev_app-1-1.x86_64.rpm',
-                type: 'rpm' ]
+                type: 'rpm']
               ]
           )
         }
