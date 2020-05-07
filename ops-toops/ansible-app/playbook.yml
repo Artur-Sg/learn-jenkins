@@ -11,3 +11,6 @@
       tags: ["configuration"]
     - role: web
       tags: ["deployment"]
+  environment:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
