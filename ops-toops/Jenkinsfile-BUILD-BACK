@@ -23,6 +23,7 @@ pipeline {
       dir('/var/lib/jenkins/rpmbuild/RPMS/x86_64/') {
         nexusArtifactUploader(
           nexusVersion: 'nexus2',
+          protocol: 'https',
           nexusUrl: 'https://repository.dev.thumbtack.net/nexus',
           repository: 'dev-ops-2020',
           groupId: 'sgibnev',
