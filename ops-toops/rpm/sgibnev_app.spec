@@ -18,8 +18,8 @@ Homtask 3 with RPM backend package.
 mkdir -p %{buildroot}/usr/bin/backapp
 mkdir -p %{buildroot}/etc/systemd/system/
 
-install -m 755 %{_sourcedir}/ops_school-0.0.1-SNAPSHOT-jar-with-dependencies.jar %{buildroot}/usr/bin/backapp/backend.jar
-install -m 755 %{_sourcedir}/backend_app.service %{buildroot}/etc/systemd/system/backend_app.service
+install -m 755 /var/lib/jenkins/workspace/Build-Back/backend/target/ops_school-0.0.1-SNAPSHOT-jar-with-dependencies.jar %{buildroot}/usr/bin/backapp/backend.jar
+install -m 755 /var/lib/jenkins/workspace/Build-Back/ops-toops/rpm/backend_app.service %{buildroot}/etc/systemd/system/backend_app.service
 
 %files
 
