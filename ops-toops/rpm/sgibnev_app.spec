@@ -7,6 +7,9 @@ License:    MIT
 %description
 Homtask 3 with RPM backend package.
 
+%define 
+_rpmdir /var/lib/jenkins/rpmbuild/RPMS/
+
 %prep
 
 %build
