@@ -1,20 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Install dependencies') {
-      steps {
-        sh 'yarn install'
-      }
-    }
-  stage('Quality checks') {
-    steps {
-      sh 'npx eslint src'
-      sh 'yarn run test:nowatch'
-      }
-    }
   stage('Build') {
     steps {
-      sh 'yarn build'
+      dir('backend') {
+        sh 'mvn clean package'
+        }
       }
     }
   stage('Publish artifact') {
@@ -22,8 +13,8 @@ pipeline {
       NEXUS_CREDS = credentials('nexus-creds');
     }
     steps {
-      sh 'zip -r lineate-artifact.zip ./build'
-      sh 'curl -vvv -u $NEXUS_CREDS --upload-file lineate-artifact.zip https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/sgibnev/lineate-artifact.zip'
+      //sh 'zip -r lineate-artifact.zip ./build'
+      //sh 'curl -vvv -u $NEXUS_CREDS --upload-file lineate-artifact.zip https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/sgibnev/lineate-artifact.zip'
       }
     }
   }
