@@ -1,0 +1,9 @@
+env: development
+
+ansible_user                 : centos
+ansible_ssh_private_key_file : /home/artur/Documents/ansible-test/hometask2.pem
+
+nginx_greetings:
+  - { name: "Greetings, my name is", value: "{{ ansible_hostname }}" }
+  - { name: "My kernel is", value: "{{ ansible_kernel }}" }
+  - { name: "Check backend_app", value: "/api" }

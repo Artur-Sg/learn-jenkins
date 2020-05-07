@@ -1,0 +1,13 @@
+---
+- name: Install rpm package
+  hosts: development
+
+  become: yes
+
+  roles:
+    - role: common
+      tags: ["configuration"]
+    - role: nginx
+      tags: ["configuration"]
+    - role: web
+      tags: ["deployment"]

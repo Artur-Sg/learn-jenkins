@@ -1,0 +1,37 @@
+---
+- name: ensure that nginx is installed
+  yum:
+    pkg: nginx
+    state: present
+
+- name: populate a nginx config
+  template:
+    src: site.conf.j2
+    dest: /etc/nginx/conf.d/site.conf
+  notify: reload nginx
+
+- name: replace the main nginx config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify: reload nginx
+
+- name: create the root folder
+  file:
+    name: "{{ server_root_directory }}"
+    state: directory
+    
+- name: Move builded files
+  command: mv /var/lib/jenkins/workspace/Check-Front/frontend/build/* "{{ server_root_directory }}/
+
+- name: toggle SELinux value httpd network to on
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+
+- name: enable nginx service
+  service:
+    name: nginx
+    state: started
+    enabled: yes
