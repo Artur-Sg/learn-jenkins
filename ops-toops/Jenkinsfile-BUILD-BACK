@@ -21,7 +21,20 @@ pipeline {
     }
     steps {
       dir('/var/lib/jenkins/rpmbuild/RPMS/x86_64/') {
-        sh 'curl -vvv -u $NEXUS_CREDS --upload-file sgibnev_app-1-1.x86_64.rpm https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/sgibnev/sgibnev_app-1-1.x86_64.rpm'
+        nexusArtifactUploader(
+          nexusVersion: 'nexus3',
+          protocol: 'https',
+          nexusUrl: 'https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/sgibnev/sgibnev_app-1-1.x86_64.rpm',
+          version: '1-1',
+          repository: 'https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/',
+          credentialsId: '$NEXUS_CREDS',
+          artifacts: [
+              [artifactId: sgibnev_app,
+              classifier: '',
+              file: 'sgibnev_app-1-1.x86_64.rpm',
+              type: 'rpm']
+              ]
+          )
         }
       }
     }
