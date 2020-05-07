@@ -24,10 +24,10 @@ pipeline {
         nexusArtifactUploader(
           nexusVersion: 'nexus2',
           protocol: 'https',
-          nexusUrl: 'https://repository.dev.thumbtack.net/nexus',
+          nexusUrl: 'repository.dev.thumbtack.net/nexus',
           repository: 'dev-ops-2020',
           groupId: 'sgibnev',
-          version: '1-1',
+          version: '1.1',
           credentialsId: 'nexus-creds',
           artifacts: [
               [ artifactId: 'sgibnev_app',
