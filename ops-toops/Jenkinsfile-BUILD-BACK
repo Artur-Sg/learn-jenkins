@@ -23,14 +23,15 @@ pipeline {
       dir('/var/lib/jenkins/rpmbuild/RPMS/x86_64/') {
         nexusArtifactUploader(
           nexusVersion: 'nexus2',
-          nexusUrl: 'https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/sgibnev/sgibnev_app-1-1.x86_64.rpm',
-          groupId: 'ops_school',
+          nexusUrl: 'https://repository.dev.thumbtack.net/nexus',
+          repository: 'dev-ops-2020',
+          groupId: 'sgibnev',
           version: '1-1',
-          repository: 'https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/',
           credentialsId: '$NEXUS_CREDS',
           artifacts: [
-              [file: 'sgibnev_app-1-1.x86_64.rpm',
-              type: 'rpm']
+              [ artifactId: 'sgibnev_app',
+                file: 'sgibnev_app-1-1.x86_64.rpm',
+                type: 'rpm']
               ]
           )
         }
