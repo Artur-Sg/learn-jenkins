@@ -1,0 +1,31 @@
+pipeline {
+  agent any
+  stages {
+    stage('Go to front dir') {
+      steps {
+        sh 'cd frontend'
+      }
+    }
+    stage('Install dependencies') {
+      steps {
+        sh 'yarn install'
+      }
+    }
+  stage('Quality checks') {
+    steps {
+      sh 'npx eslint src'
+      sh 'yarn run test:nowatch'
+      }
+    }
+  stage('Build') {
+    steps {
+      sh 'yarn build'
+      }
+    }
+  stage('Return to parent dir') {
+    steps {
+      sh 'cd ./'
+      }
+    }
+  }
+}
