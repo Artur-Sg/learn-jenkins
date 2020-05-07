@@ -25,14 +25,11 @@ pipeline {
           nexusVersion: 'nexus3',
           protocol: 'https',
           nexusUrl: 'https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/sgibnev/sgibnev_app-1-1.x86_64.rpm',
-          groupId: 'ops_school',
-          version: '1-1',
           repository: 'https://repository.dev.thumbtack.net/nexus/content/repositories/dev-ops-2020/',
           credentialsId: '$NEXUS_CREDS',
           artifacts: [
-              [file: 'sgibnev_app-1-1.x86_64.rpm',
-              type: 'rpm']
-              ]
+              [file: 'sgibnev_app-1-1.x86_64.rpm']
+            ]
           )
         }
       }
