@@ -23,7 +23,7 @@
     
 - name: Move builded files
   copy:
-    src: /var/lib/jenkins/workspace/Check-Front/frontend/build/
+    src: /var/lib/jenkins/workspace/Check-Build-Front/frontend/build/
     dest: "{{ server_root_directory }}"
   notify: reload nginx
 
