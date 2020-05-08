@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    GITHUB_API_URL='https://api.github.com/Artur-Sg/learn-jenkins'
+    GITHUB_API_URL='https://api.github.com/repos/Artur-Sg/learn-jenkins'
   }
   triggers {
     GenericTrigger(
