@@ -50,6 +50,7 @@ pipeline {
       }
     }
     failure {
+      sh 'echo Fail!'
       setBuildStatus("Build failed", "FAILURE");
     }
   }
