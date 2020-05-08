@@ -35,7 +35,7 @@ pipeline {
   post {
     success {
       build job: 'Check-PR', parameters: [[$class: 'StringParameterValue', name: 'PR_BRANCH', value: PR_BRANCH]]
-      withCredentials([usernamePassword(credentialsId: 'your_credentials_id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+      withCredentials([usernamePassword(credentialsId: 'GitHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh 'curl -X POST --user $USERNAME:$PASSWORD --data  "{\\"state\\": \\"success\\"}" --url $GITHUB_API_URL/statuses/$GIT_COMMIT'
       }
       sh 'echo isMerger: IS_PR_MERGED!'
@@ -46,7 +46,7 @@ pipeline {
       }
     }
     failure {
-      withCredentials([usernamePassword(credentialsId: 'your_credentials_id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+      withCredentials([usernamePassword(credentialsId: 'GitHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh 'curl -X POST --user $USERNAME:$PASSWORD --data  "{\\"state\\": \\"failure\\"}" --url $GITHUB_API_URL/statuses/$GIT_COMMIT'
       }
     }
