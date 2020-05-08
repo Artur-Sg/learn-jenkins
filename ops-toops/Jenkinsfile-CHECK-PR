@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  stages {
+    stage('Install dependencies') {
+      steps {
+        dir('frontend') {
+          sh 'yarn install'
+        }
+      }
+    }
+  stage('Quality checks') {
+    steps {
+      dir('frontend') {
+        sh 'npx eslint src'
+        sh 'yarn run test:nowatch'
+        }
+      }
+    }
+  stage('Build') {
+    steps {
+      dir('frontend') {
+        sh 'yarn build'
+        }
+      }
+    }
+  }
+  post {
+    success {
+      build job: 'Build-Back'
+    }
+  }
+}
