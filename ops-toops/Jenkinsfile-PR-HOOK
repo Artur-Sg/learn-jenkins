@@ -10,14 +10,14 @@ pipeline {
         [key: 'PR_MERGED_BASE', value: '$.pull_request.base.ref'],
       ],
     
-    causeString: '$DEVELOPER has updated PR $PR_NAME',
+      causeString: '$DEVELOPER has updated PR $PR_NAME',
 
-    token: 'LINEATE',
+      token: 'LINEATE',
 
-    printContributedVariables: false,
-    printPostContent: false,
+      printContributedVariables: false,
+      printPostContent: false,
 
-    silentResponse: false,
+      silentResponse: false,
     )
   }
   stages {
