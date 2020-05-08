@@ -10,14 +10,14 @@ pipeline {
         [key: 'PR_MERGED_BASE', value: '$.pull_request.base.ref'],
       ],
     
-      causeString: '$DEVELOPER has updated PR $PR_NAME',
+    causeString: '$DEVELOPER has updated PR $PR_NAME',
 
-      token: 'LINEATE',
+    token: 'LINEATE',
 
-      printContributedVariables: false,
-      printPostContent: false,
+    printContributedVariables: false,
+    printPostContent: false,
 
-      silentResponse: false,
+    silentResponse: false,
     )
   }
   stages {
@@ -32,7 +32,7 @@ pipeline {
   post {
     success {
       build job 'Check-PR', parameters: [[$class: 'StringParameterValue', name: 'PR_BRANCH', value: PR_BRANCH]]
-      sh 'echo isMerger: IS_PR_MERGED!"'
+      sh 'echo isMerger: IS_PR_MERGED!'
       script {
         if (PR_MERGED_BASE == 'master' && IS_PR_MERGED == 'true') {
           build job 'Check-Build-Front', parameters: [[$class: 'StringParameterValue', name: 'BUILD_BRANCH', value: "master"]]
