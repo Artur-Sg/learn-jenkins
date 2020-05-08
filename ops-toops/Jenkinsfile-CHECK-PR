@@ -16,17 +16,5 @@ pipeline {
         }
       }
     }
-  stage('Build') {
-    steps {
-      dir('frontend') {
-        sh 'yarn build'
-        }
-      }
-    }
-  }
-  post {
-    success {
-      build job: 'Build-Back'
-    }
   }
 }
