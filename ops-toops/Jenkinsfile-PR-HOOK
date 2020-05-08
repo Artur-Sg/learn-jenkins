@@ -1,14 +1,8 @@
-void setBuildStatus(String message, String state) {
-  step([
-      $class: "GitHubCommitStatusSetter",
-      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/Artur-Sg/learn-jenkins"],
-      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
-      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
-      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
-  ]);
-}
 pipeline {
   agent any
+  environment {
+    GITHUB_API_URL='https://api.github.com/Artur-Sg/learn-jenkins'
+  }
   triggers {
     GenericTrigger(
       genericVariables: [
@@ -41,8 +35,10 @@ pipeline {
   post {
     success {
       build job: 'Check-PR', parameters: [[$class: 'StringParameterValue', name: 'PR_BRANCH', value: PR_BRANCH]]
+      withCredentials([usernamePassword(credentialsId: 'your_credentials_id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        sh 'curl -X POST --user $USERNAME:$PASSWORD --data  "{\\"state\\": \\"success\\"}" --url $GITHUB_API_URL/statuses/$GIT_COMMIT'
+      }
       sh 'echo isMerger: IS_PR_MERGED!'
-      setBuildStatus("Build succeeded", "SUCCESS");
       script {
         if (PR_MERGED_BASE == 'master' && IS_PR_MERGED == 'true') {
           build job: 'Check-Build-Front', parameters: [[$class: 'StringParameterValue', name: 'BUILD_BRANCH', value: "master"]]
@@ -50,7 +46,9 @@ pipeline {
       }
     }
     failure {
-      setBuildStatus("Build failed", "FAILURE");
+      withCredentials([usernamePassword(credentialsId: 'your_credentials_id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        sh 'curl -X POST --user $USERNAME:$PASSWORD --data  "{\\"state\\": \\"failure\\"}" --url $GITHUB_API_URL/statuses/$GIT_COMMIT'
+      }
     }
   }
 }
